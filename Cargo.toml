@@ -1,0 +1,20 @@
+[package]
+name = "mill-playfield"
+version = "0.1.0"
+authors = ["Jannik Becker <jannikb@posteo.de>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+smallvec = "1.10.0"
+fnv = "1.0.7"
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+lto = true # = fat lto, lto = "thin" might be preferable
+codegen-units = 1 # disable codegen unit parallelization to higher the optimization potential
+panic = "abort" # disables catch or unwind panics, reduces binary size & might increase performance slightly
+strip = true
